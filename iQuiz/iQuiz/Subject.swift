@@ -13,6 +13,12 @@ class Subject {
     var desc: String
     var questions: [Question]
     
+    init () {
+        title = ""
+        desc = ""
+        questions = [Question]()
+    }
+    
     init (sub: String, descr: String, quest: [Question]) {
         title = sub
         desc = descr

@@ -19,7 +19,7 @@ class AnswerViewController: UIViewController {
     var qText: String = ""
     var aText: String = ""
     
-    var subject = ""
+    var subject = Subject()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,7 @@ class AnswerViewController: UIViewController {
         } else if segue.identifier == "NextQ" {
             if let destination = segue.destinationViewController as? SubjectViewController {
                 destination.questionNum = currentQ + 1
-                destination.subject = subject
+                destination.subjectType = subject
                 destination.numCorrect = totalCorrect
             }
         } else {

@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     private var sub : SubjectViewController!
     private var ans : AnswerViewController!
     var qNum = 0
-    var subjectClicked = ""
+    var subjectClicked = Subject()
     
     //JSON file, local
     var json: String = "[{\"title\":\"Science!\",\"desc\":\"Because SCIENCE!\",\"questions\":[{\"text\":\"What is fire?\",\"answer\":\"1\",\"answers\":[\"One of the four classical elements\",\"A magical reaction given to us by God\",\"A band that hasn't yet been discovered\",\"Fire! Fire! Fire! heh-heh\"]}]},{ \"title\":\"Marvel Super Heroes\", \"desc\": \"Avengers, Assemble!\",\"questions\":[{\"text\":\"Who is Iron Man?\",\"answer\":\"1\",\"answers\":[\"Tony Stark\",\"Obadiah Stane\",\"A rock hit by Megadeth\",\"Nobody knows\"]},{\"text\":\"Who founded the X-Men?\",\"answer\":\"2\",\"answers\":[\"Tony Stark\",\"Professor X\",\"The X-Institute\",\"Erik Lensherr\"]},{\"text\":\"How did Spider-Man get his powers?\",\"answer\":\"1\",\"answers\":[\"He was bitten by a radioactive spider\",\"He ate a radioactive spider\",\"He is a radioactive spider\",\"He looked at a radioactive spider\"]}]},{ \"title\":\"Mathematics\", \"desc\":\"Did you pass the third grade?\",\"questions\":[{\"text\":\"What is 2+2?\",\"answer\":\"1\",\"answers\":[\"4\",\"22\",\"An irrational number\",\"Nobody knows\"]}]}]"
@@ -60,7 +60,7 @@ class ViewController: UIViewController {
                 var listOfQ = [Question]()
                 for quest in questions {
                     NSLog("question: \(quest)")
-                    let correct = quest["answer"] as! Int
+                    let correct = quest["answer"]// as! Int
                     let text = quest["text"] as! String
                     let answers = quest["answers"] as! [String]
                     var listOfAns = [Answer]()
@@ -69,19 +69,12 @@ class ViewController: UIViewController {
                         listOfAns.append(Answer(text: ans))
                     }
                     NSLog("answers: \(listOfAns)")
-                    listOfQ.append(Question(quest: text, correct: correct, ans: listOfAns))
+                    listOfQ.append(Question(quest: text, correct: Int(correct as! String)!, ans: listOfAns))
                 }
                 subjects.append(Subject(sub: title, descr: description, quest: listOfQ))
                 //NSLog("Subject title: \(title)")
                 //NSLog("Questions: \(questions)")
             }
-            /*if let jsonSubject = jsonObj["title"] as? [Subject] {
-                NSLog("\(jsonSubject)")
-                NSLog("It worked!")
-            } else {
-                NSLog("What is \(jsonObj)? Something went wrong")
-                NSLog("\(jsonObj)...")
-            }*/
         } catch let error as NSError {
             NSLog("Something isn't working... \(error.localizedDescription)")
         }
@@ -102,15 +95,15 @@ class ViewController: UIViewController {
             cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: tableID)
         }
         cell.imageView?.image = UIImage(named: "200px-ALBW_Triforce")
-        cell.textLabel?.text = subjects[indexPath.row]
-        cell.detailTextLabel?.text = subjectsDescr[indexPath.row]
+        cell.textLabel?.text = subjects[indexPath.row].title
+        cell.detailTextLabel?.text = subjects[indexPath.row].desc
         return cell
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "Start" {
             if let destination = segue.destinationViewController as? SubjectViewController {
-                destination.subject = subjectClicked
+                destination.subjectType = subjectClicked
                 destination.questionNum = 0
             }
         }
