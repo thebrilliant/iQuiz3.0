@@ -6,7 +6,6 @@
 //  Copyright © 2015 Vivyan Woods. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class FinishedViewController: UIViewController {

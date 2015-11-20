@@ -10,14 +10,17 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    //let nav = self.navigationController as! NavController
+    
     @IBOutlet weak var subjectTable: UITableView!
-    private var subjects = [Subject]() //["Mathematics", "Marvel Super Heroes", "Science"] //
-    //private let subjectsDescr = ["Math questions here!", "All the MSH trivia here!", "Science is so much fun!"]
+    private var subjects = [Subject]()
     let tableID = "QuizTopics"
     private var sub : SubjectViewController!
     private var ans : AnswerViewController!
     var qNum = 0
     var subjectClicked = Subject()
+    
+    var jsonArray = [AnyObject]()
     
     //JSON file, local
     var json: String = "[{\"title\":\"Science!\",\"desc\":\"Because SCIENCE!\",\"questions\":[{\"text\":\"What is fire?\",\"answer\":\"1\",\"answers\":[\"One of the four classical elements\",\"A magical reaction given to us by God\",\"A band that hasn't yet been discovered\",\"Fire! Fire! Fire! heh-heh\"]}]},{ \"title\":\"Marvel Super Heroes\", \"desc\": \"Avengers, Assemble!\",\"questions\":[{\"text\":\"Who is Iron Man?\",\"answer\":\"1\",\"answers\":[\"Tony Stark\",\"Obadiah Stane\",\"A rock hit by Megadeth\",\"Nobody knows\"]},{\"text\":\"Who founded the X-Men?\",\"answer\":\"2\",\"answers\":[\"Tony Stark\",\"Professor X\",\"The X-Institute\",\"Erik Lensherr\"]},{\"text\":\"How did Spider-Man get his powers?\",\"answer\":\"1\",\"answers\":[\"He was bitten by a radioactive spider\",\"He ate a radioactive spider\",\"He is a radioactive spider\",\"He looked at a radioactive spider\"]}]},{ \"title\":\"Mathematics\", \"desc\":\"Did you pass the third grade?\",\"questions\":[{\"text\":\"What is 2+2?\",\"answer\":\"1\",\"answers\":[\"4\",\"22\",\"An irrational number\",\"Nobody knows\"]}]}]"
@@ -29,54 +32,63 @@ class ViewController: UIViewController {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
+    @IBAction func exit(segue: UIStoryboardSegue) {
+        print("move back")
+    }
+    
+    func setData(data: [AnyObject]) {
+        print("\(data) ...")
+        jsonArray = data
+        parse(jsonArray)
+        print("loaded from internet")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         //for JSON
-        let jsonFileName = "questions.json"
-        var jsonText : NSString = ""
-        if let directory : NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-            let path = directory.stringByAppendingPathComponent(jsonFileName)
+        if jsonArray.isEmpty {
+            var jsonText : NSString = json
+            let data = jsonText.dataUsingEncoding(NSUTF8StringEncoding)
+            let options = NSJSONReadingOptions()
             do {
-                jsonText = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+                let jsonObj = try NSJSONSerialization.JSONObjectWithData(data!, options: options) as! NSArray
+                NSLog("here's what we have: \(jsonObj)")
+                NSLog("Trying to access the objects... \(jsonObj[0])")
+                
+                parse(jsonObj)
             } catch let error as NSError {
                 NSLog("Something isn't working... \(error.localizedDescription)")
-                NSLog("file path: \(path)")
-                jsonText = json
             }
+        } else {
+            parse(jsonArray)
+            print("loaded from internet")
         }
-        let data = jsonText.dataUsingEncoding(NSUTF8StringEncoding)
-        let options = NSJSONReadingOptions()
-        do {
-            let jsonObj = try NSJSONSerialization.JSONObjectWithData(data!, options: options) as! NSArray
-            NSLog("here's what we have: \(jsonObj)")
-            NSLog("Trying to access the objects... \(jsonObj[0])")
-            
-            for subject in jsonObj {
-                let title = subject["title"] as! String
-                let description = subject["desc"] as! String
-                let questions = subject["questions"]  as! [AnyObject]
-                var listOfQ = [Question]()
-                for quest in questions {
-                    NSLog("question: \(quest)")
-                    let correct = quest["answer"]// as! Int
-                    let text = quest["text"] as! String
-                    let answers = quest["answers"] as! [String]
-                    var listOfAns = [Answer]()
-                    for ans in answers {
-                        NSLog("anseweer: \(ans)")
-                        listOfAns.append(Answer(text: ans))
-                    }
-                    NSLog("answers: \(listOfAns)")
-                    listOfQ.append(Question(quest: text, correct: Int(correct as! String)!, ans: listOfAns))
+    }
+    
+    private func parse(jsonObj: NSArray) {
+        for subject in jsonObj {
+            let title = subject["title"] as! String
+            let description = subject["desc"] as! String
+            let questions = subject["questions"]  as! [AnyObject]
+            var listOfQ = [Question]()
+            for quest in questions {
+                NSLog("question: \(quest)")
+                let correct = quest["answer"]// as! Int
+                let text = quest["text"] as! String
+                let answers = quest["answers"] as! [String]
+                var listOfAns = [Answer]()
+                for ans in answers {
+                    NSLog("anseweer: \(ans)")
+                    listOfAns.append(Answer(text: ans))
                 }
-                subjects.append(Subject(sub: title, descr: description, quest: listOfQ))
-                //NSLog("Subject title: \(title)")
-                //NSLog("Questions: \(questions)")
+                NSLog("answers: \(listOfAns)")
+                listOfQ.append(Question(quest: text, correct: Int(correct as! String)!, ans: listOfAns))
             }
-        } catch let error as NSError {
-            NSLog("Something isn't working... \(error.localizedDescription)")
+            subjects.append(Subject(sub: title, descr: description, quest: listOfQ))
+            //NSLog("Subject title: \(title)")
+            //NSLog("Questions: \(questions)")
         }
     }
 
@@ -105,6 +117,10 @@ class ViewController: UIViewController {
             if let destination = segue.destinationViewController as? SubjectViewController {
                 destination.subjectType = subjectClicked
                 destination.questionNum = 0
+            }
+        } else if segue.identifier == "Settings" {
+            if let destination = segue.destinationViewController as? SettingsViewController {
+                destination.delegate = self
             }
         }
     }

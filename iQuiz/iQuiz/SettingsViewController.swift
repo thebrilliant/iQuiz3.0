@@ -6,19 +6,27 @@
 //  Copyright © 2015 Vivyan Woods. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class SettingsViewController: UIViewController {
+
     @IBOutlet weak var urlText: UITextField!
     var makeQuiz = [AnyObject]()
     
+    var delegate : ViewController?
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
         //stuff
     }
     
     override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
         //stuff
+    }
+    
+    @IBAction func transferData(sender: UIButton) {
+        delegate?.setData(makeQuiz)
     }
     
     @IBAction func loadURL(sender: UIButton) {
@@ -45,6 +53,9 @@ class SettingsViewController: UIViewController {
                 
                 self.makeQuiz = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! [AnyObject]
                 print(self.makeQuiz)
+                
+                let nav : NavController = self.view.window?.rootViewController as! NavController
+                nav.makeQuiz = self.makeQuiz
                 
             } catch let error as NSError{
                 

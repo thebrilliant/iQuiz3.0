@@ -6,10 +6,10 @@
 //  Copyright © 2015 Vivyan Woods. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class AnswerViewController: UIViewController {
+
     @IBOutlet weak var correctText: UILabel!
     @IBOutlet weak var qAText: UILabel!
     var currentQ = 0

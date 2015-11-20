@@ -12,6 +12,7 @@
 		2C276A401BFE6A4900DF340E /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C276A3F1BFE6A4900DF340E /* Question.swift */; };
 		2C276A421BFE6AC000DF340E /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C276A411BFE6AC000DF340E /* Answer.swift */; };
 		2C276A441BFEB05200DF340E /* questions.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C276A431BFEB05200DF340E /* questions.json */; };
+		2C276A481BFEDA8700DF340E /* NavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C276A471BFEDA8700DF340E /* NavController.swift */; };
 		2C86D62A1BE9534F0035FF59 /* SubjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86D6291BE9534F0035FF59 /* SubjectController.swift */; };
 		2C94D6731BF258A80084F8CD /* AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C94D6721BF258A80084F8CD /* AnswerViewController.swift */; };
 		2C94D6751BF2ACE90084F8CD /* FinishedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C94D6741BF2ACE90084F8CD /* FinishedViewController.swift */; };
@@ -47,6 +48,7 @@
 		2C276A3F1BFE6A4900DF340E /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		2C276A411BFE6AC000DF340E /* Answer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		2C276A431BFEB05200DF340E /* questions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = questions.json; sourceTree = "<group>"; };
+		2C276A471BFEDA8700DF340E /* NavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavController.swift; sourceTree = "<group>"; };
 		2C86D6291BE9534F0035FF59 /* SubjectController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectController.swift; sourceTree = "<group>"; };
 		2C94D6721BF258A80084F8CD /* AnswerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerViewController.swift; sourceTree = "<group>"; };
 		2C94D6741BF2ACE90084F8CD /* FinishedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				2C276A3F1BFE6A4900DF340E /* Question.swift */,
 				2C276A411BFE6AC000DF340E /* Answer.swift */,
 				2C276A431BFEB05200DF340E /* questions.json */,
+				2C276A471BFEDA8700DF340E /* NavController.swift */,
 			);
 			path = iQuiz;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				2C94D6731BF258A80084F8CD /* AnswerViewController.swift in Sources */,
 				2C276A421BFE6AC000DF340E /* Answer.swift in Sources */,
 				2C276A3E1BFE69E600DF340E /* Subject.swift in Sources */,
+				2C276A481BFEDA8700DF340E /* NavController.swift in Sources */,
 				2CAA53E11BE323D500E4571A /* ViewController.swift in Sources */,
 				2CAA53DF1BE323D500E4571A /* AppDelegate.swift in Sources */,
 				2C94D6751BF2ACE90084F8CD /* FinishedViewController.swift in Sources */,

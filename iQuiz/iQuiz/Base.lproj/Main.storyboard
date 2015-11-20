@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bIi-Pr-X0s">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mZq-cz-azO">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -58,8 +58,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="nNY-LL-jyH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1077" y="265"/>
+            <point key="canvasLocation" x="1889" y="265"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="2e9-Zm-3Nr">
@@ -99,7 +100,8 @@
                                 <animations/>
                                 <state key="normal" title="Cancel"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="SVa-vk-e3Q"/>
+                                    <action selector="transferData:" destination="Ol8-R1-D4Y" eventType="touchUpInside" id="kYy-Nh-CLM"/>
+                                    <segue destination="nNY-LL-jyH" kind="unwind" unwindAction="exit:" id="mhq-BE-dla"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -122,7 +124,50 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="snJ-AL-uK0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1756" y="265"/>
+            <point key="canvasLocation" x="2568" y="265"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="3mz-VI-gdQ">
+            <objects>
+                <viewController id="ouX-hZ-uzT" customClass="MainViewController" customModule="iQuiz" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CnW-Va-7px"/>
+                        <viewControllerLayoutGuide type="bottom" id="Y2y-CV-wmk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5oC-Ke-nCR">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QK5-aE-Yj5">
+                                <rect key="frame" x="20" y="116" width="560" height="369"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Lmy-dP-8zE"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="26M-lc-qmA"/>
+                                </connections>
+                            </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NX6-uF-hPO">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <animations/>
+                                <items>
+                                    <barButtonItem title="Settings" id="hYL-dM-dE8" userLabel="Settings"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NX6-uF-hPO" firstAttribute="centerX" secondItem="5oC-Ke-nCR" secondAttribute="centerX" id="BfA-FK-aoq"/>
+                            <constraint firstItem="QK5-aE-Yj5" firstAttribute="centerX" secondItem="5oC-Ke-nCR" secondAttribute="centerX" id="bIr-v8-XyN"/>
+                            <constraint firstItem="NX6-uF-hPO" firstAttribute="top" secondItem="CnW-Va-7px" secondAttribute="bottom" constant="536" id="qfG-bb-9Ap"/>
+                            <constraint firstItem="QK5-aE-Yj5" firstAttribute="top" secondItem="CnW-Va-7px" secondAttribute="bottom" constant="96" id="r9l-0S-qMr"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CoS-Ze-j4z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2420" y="1117"/>
         </scene>
         <!--Subject View Controller-->
         <scene sceneID="y1w-nz-Qxa">
@@ -183,7 +228,6 @@
                     </view>
                     <connections>
                         <outlet property="list" destination="fOt-kv-u8z" id="wjc-Dp-auS"/>
-                        <segue destination="bIi-Pr-X0s" kind="show" identifier="GoBack" id="IDj-vz-ldC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Utt-Zh-H5Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -250,7 +294,6 @@
                         <outlet property="qAText" destination="465-jh-bFh" id="EV2-qO-tLC"/>
                         <segue destination="Gej-iJ-apV" kind="show" identifier="NextQ" id="Bl9-bJ-Jie"/>
                         <segue destination="DHx-wy-ydu" kind="show" identifier="Complete" id="6aB-jD-wIA"/>
-                        <segue destination="bIi-Pr-X0s" kind="show" identifier="Back" id="sUK-A6-VfC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VCJ-dL-flA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -282,6 +325,7 @@
                                 <state key="normal" title="Complete"/>
                                 <connections>
                                     <action selector="completePressed:" destination="DHx-wy-ydu" eventType="touchUpInside" id="LU9-Pj-pfM"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="Home" id="sXC-80-zTK"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sox-6N-Avs">
@@ -306,36 +350,35 @@
                     <connections>
                         <outlet property="rank" destination="U5S-cJ-Pzw" id="Nzr-XN-bjc"/>
                         <outlet property="ratio" destination="Sox-6N-Avs" id="EAW-dF-hXX"/>
-                        <segue destination="bIi-Pr-X0s" kind="show" identifier="Home" id="6wC-Rl-hvl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X9z-bx-IWS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="958" y="1117"/>
+            <point key="canvasLocation" x="979" y="1284"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="zts-oW-RS7">
+        <!--Nav Controller-->
+        <scene sceneID="w1C-su-aCH">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bIi-Pr-X0s" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mZq-cz-azO" customClass="NavController" customModule="iQuiz" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rNz-C8-FLt">
+                    <navigationItem key="navigationItem" id="U5b-xp-jsB"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CS1-M6-t6Q">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="mrg-ao-67G"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="NFq-C3-Ye6"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cZT-RE-Xwc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="phF-wH-fYw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="258" y="265"/>
+            <point key="canvasLocation" x="1077" y="265"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="4oD-Wo-dLm"/>
-        <segue reference="SVa-vk-e3Q"/>
-        <segue reference="IDj-vz-ldC"/>
+        <segue reference="Bl9-bJ-Jie"/>
+        <segue reference="sXC-80-zTK"/>
     </inferredMetricsTieBreakers>
 </document>
